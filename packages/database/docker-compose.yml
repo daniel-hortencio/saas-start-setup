@@ -1,0 +1,18 @@
+version: "3"
+services:
+  db:
+    image: "postgres:15-alpine"
+    container_name: "mi-obra-database"
+    restart: "always"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    env_file:
+      - .env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - ${DB_PORT}:5432
+
+volumes:
+  postgres-data:
