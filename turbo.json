@@ -9,13 +9,13 @@
     "lint": {
       "dependsOn": ["^lint"]
     },
+    "db:generate": {
+      "cache": false
+    },
     "dev": {
       "dependsOn": ["^db:generate"],
       "cache": false,
       "persistent": true
-    },
-    "db:generate": {
-      "cache": false
     }
   }
 }
