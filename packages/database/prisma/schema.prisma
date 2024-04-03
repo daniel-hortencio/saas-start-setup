@@ -9,8 +9,10 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider     = "postgresql"
+  url          = env("POSTGRES_PRISMA_URL")
+  directUrl    = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  relationMode = "prisma"
 }
 
 enum Role {
@@ -22,15 +24,16 @@ model User {
   id   String @id @default(uuid())
   email String  @unique
   name  String?
+  password String?
   email_verified Boolean @default(false)
   roles          Role[]   @default([USER])
-  posts   Category[]
+  categories   Category[]
 }
 
 model Category {
   id   String @id @default(uuid())
   name String?
-  user User       @relation(fields: [user_id], references: [id])
+  user User?       @relation(fields: [user_id], references: [id])
   user_id   String //
   icon String?
   color String?
