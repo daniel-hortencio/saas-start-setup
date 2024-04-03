@@ -1,0 +1,15 @@
+{
+  "extends": "@repo/typescript-config/base.json",
+  "compilerOptions": {
+    "lib": ["es5", "es6", "dom"]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "tsup.config.ts",
+    "src/**/*.ts",
+    "test/**/*.spec.ts"
+  ],
+  "exclude": ["node_modules"]
+}
