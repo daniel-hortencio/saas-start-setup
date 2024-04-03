@@ -8,18 +8,35 @@ export class UserService {
   }
 
   async findAll(): Promise<any> {
-    return await db_client.user.findMany();
+    return await db_client.user.findMany({
+      select: {
+        id: true,
+        name: true,
+        email_verified: true,
+        roles: true,
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string): Promise<any> {
+    return await db_client.user.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        id: true,
+        name: true,
+        email_verified: true,
+        roles: true,
+      },
+    });
   }
 
-  update(id: number, updateUserDto: any) {
+  update(id: string, updateUserDto: any) {
     return `This action updates a #${id} user`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} user`;
   }
 }
