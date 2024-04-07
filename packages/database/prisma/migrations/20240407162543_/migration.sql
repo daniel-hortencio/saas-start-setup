@@ -5,8 +5,8 @@ CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN');
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "name" TEXT,
-    "password" TEXT,
+    "name" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "email_verified" BOOLEAN NOT NULL DEFAULT false,
     "roles" "Role"[] DEFAULT ARRAY['USER']::"Role"[],
 
@@ -16,10 +16,10 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Category" (
     "id" TEXT NOT NULL,
-    "name" TEXT,
+    "name" TEXT NOT NULL,
     "user_id" TEXT NOT NULL,
-    "icon" TEXT,
-    "color" TEXT,
+    "icon" TEXT NOT NULL,
+    "color" TEXT NOT NULL,
 
     CONSTRAINT "Category_pkey" PRIMARY KEY ("id")
 );
