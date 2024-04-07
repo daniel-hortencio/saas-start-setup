@@ -8,6 +8,10 @@ import { validateDto } from 'utils/validateDto';
 
 @Injectable()
 export class UserService {
+  DB_TABLE() {
+    return db_client.user;
+  }
+
   selectWithoutPassword() {
     return {
       id: true,
@@ -23,7 +27,7 @@ export class UserService {
 
     const { email, name, password } = createUserDto;
 
-    const email_already_registered = await db_client.user.findUnique({
+    const email_already_registered = await this.DB_TABLE().findUnique({
       where: {
         email: email,
       },
@@ -36,7 +40,7 @@ export class UserService {
       );
     }
 
-    const created_user = await db_client.user.create({
+    const created_user = await this.DB_TABLE().create({
       data: { email, name, password },
     });
 
@@ -44,13 +48,13 @@ export class UserService {
   }
 
   async findAll(): Promise<FindUserDto[]> {
-    return await db_client.user.findMany({
+    return await this.DB_TABLE().findMany({
       select: this.selectWithoutPassword(),
     });
   }
 
   async findOne(id: string): Promise<FindUserDto> {
-    const user = await db_client.user.findUnique({
+    const user = await this.DB_TABLE().findUnique({
       where: {
         id,
       },
@@ -75,7 +79,7 @@ export class UserService {
       throw new HttpException(ErrorUsers.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 
-    const updated_user = await db_client.user.update({
+    const updated_user = await this.DB_TABLE().update({
       where: {
         id,
       },
@@ -92,7 +96,7 @@ export class UserService {
       throw new HttpException(ErrorUsers.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
     }
 
-    return await db_client.user.delete({
+    return await this.DB_TABLE().delete({
       where: {
         id,
       },

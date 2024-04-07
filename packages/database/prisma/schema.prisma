@@ -30,6 +30,11 @@ model User {
   categories   Category[]
 }
 
+enum TransactionType {
+  REVENUE
+  EXPENSE
+}
+
 model Category {
   id   String @id @default(uuid())
   name String
@@ -37,4 +42,5 @@ model Category {
   user_id   String
   icon String
   color String
+  type TransactionType[]
 }
