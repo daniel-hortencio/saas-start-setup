@@ -34,7 +34,7 @@ model Category {
   id   String @id @default(uuid())
   name String?
   user User?       @relation(fields: [user_id], references: [id])
-  user_id   String //
+  user_id   String? //
   icon String?
   color String?
 }
