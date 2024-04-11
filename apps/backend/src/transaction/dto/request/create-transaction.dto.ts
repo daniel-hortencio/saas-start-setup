@@ -1,10 +1,11 @@
 import { TransactionType } from '@prisma/client';
 import {
-  IsDate,
   IsEnum,
   IsNotEmpty,
   IsNumber,
   IsString,
+  IsOptional,
+  IsDateString,
 } from 'class-validator';
 
 export class CreateTransactionDto {
@@ -13,11 +14,7 @@ export class CreateTransactionDto {
   name: string;
 
   @IsString()
-  @IsNotEmpty()
-  user_id: string;
-
-  @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   category_id: string;
 
   @IsNumber()
@@ -26,9 +23,9 @@ export class CreateTransactionDto {
 
   @IsEnum(TransactionType)
   @IsNotEmpty()
-  type: TransactionType[];
+  type: TransactionType;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   created_at: Date;
 }

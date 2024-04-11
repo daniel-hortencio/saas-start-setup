@@ -53,7 +53,7 @@ model Transaction {
   name String
   user User       @relation(fields: [user_id], references: [id])
   user_id   String
-  category_id String?
+  category_id String? @default("")
   value Float
   type TransactionType[]
   created_at   DateTime

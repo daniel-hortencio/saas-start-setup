@@ -13,21 +13,22 @@ import { TransactionService } from './transaction.service';
 import { CreateTransactionDto } from './dto/request/create-transaction.dto';
 import { UpdateTransactionDto } from './dto/request/update-transaction.dto';
 
-@Controller('transaction')
+@Controller('transactions')
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}
 
   @Post()
   create(
     @Headers('user_id') user_id: string,
-    @Body(new ValidationPipe()) createTransactionDto: CreateTransactionDto,
+    @Body(new ValidationPipe())
+    createTransactionDto: CreateTransactionDto,
   ) {
-    return this.transactionService.create(createTransactionDto);
+    return this.transactionService.create(user_id, createTransactionDto);
   }
 
   @Get()
-  findAll() {
-    return this.transactionService.findAll();
+  findAll(@Headers('user_id') user_id: string) {
+    return this.transactionService.findAll(user_id);
   }
 
   @Get(':id')
