@@ -3,6 +3,7 @@ import { CreateCategoryDto } from './dto/request/create-category.dto';
 import { UpdateCategoryDto } from './dto/request/update-category.dto';
 import { UserService } from 'src/user/user.service';
 import { db_client } from '@repo/database';
+import { TransactionType } from '@prisma/client';
 import { ErrorCategories } from './errors';
 import { validateDto } from 'utils/validateDto';
 
@@ -25,7 +26,7 @@ export class CategoryService {
         icon,
         name,
         user_id,
-        type,
+        type: [TransactionType[type]],
       },
     });
 
@@ -72,7 +73,7 @@ export class CategoryService {
     await this.findOne(user_id, category_id);
     await validateDto(updateCategoryDto);
 
-    const { name, color, icon, type } = updateCategoryDto;
+    const { name, color, icon } = updateCategoryDto;
 
     const updated_category = await this.DB_TABLE().update({
       where: {
@@ -83,7 +84,6 @@ export class CategoryService {
         name,
         color,
         icon,
-        type,
       },
     });
 

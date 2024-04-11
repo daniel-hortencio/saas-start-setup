@@ -14,7 +14,7 @@ import {
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/request/create-category.dto';
 import { UpdateCategoryDto } from './dto/request/update-category.dto';
-import { ErrorCategories } from './errors';
+import { Error } from '../errors';
 
 @Controller('categories')
 export class CategoryController {
@@ -27,7 +27,7 @@ export class CategoryController {
   ) {
     if (!user_id) {
       throw new HttpException(
-        ErrorCategories.USER_ID_NOT_PROVIDED_IN_HEADER,
+        Error.USER_ID_NOT_PROVIDED_IN_HEADER,
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -39,7 +39,7 @@ export class CategoryController {
   findAll(@Headers('user_id') user_id: string) {
     if (!user_id) {
       throw new HttpException(
-        ErrorCategories.USER_ID_NOT_PROVIDED_IN_HEADER,
+        Error.USER_ID_NOT_PROVIDED_IN_HEADER,
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -51,7 +51,7 @@ export class CategoryController {
   findOne(@Headers('user_id') user_id: string, @Param('id') id: string) {
     if (!user_id) {
       throw new HttpException(
-        ErrorCategories.USER_ID_NOT_PROVIDED_IN_HEADER,
+        Error.USER_ID_NOT_PROVIDED_IN_HEADER,
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -67,7 +67,7 @@ export class CategoryController {
   ) {
     if (!user_id) {
       throw new HttpException(
-        ErrorCategories.USER_ID_NOT_PROVIDED_IN_HEADER,
+        Error.USER_ID_NOT_PROVIDED_IN_HEADER,
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -79,7 +79,7 @@ export class CategoryController {
   remove(@Headers('user_id') user_id: string, @Param('id') id: string) {
     if (!user_id) {
       throw new HttpException(
-        ErrorCategories.USER_ID_NOT_PROVIDED_IN_HEADER,
+        Error.USER_ID_NOT_PROVIDED_IN_HEADER,
         HttpStatus.BAD_REQUEST,
       );
     }

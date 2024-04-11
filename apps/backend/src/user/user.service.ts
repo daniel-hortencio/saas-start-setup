@@ -19,6 +19,7 @@ export class UserService {
       email: true,
       email_verified: true,
       roles: true,
+      created_at: true,
     };
   }
 

@@ -1,10 +1,5 @@
+import { TransactionType } from '@prisma/client';
 import { IsEnum, IsNotEmpty, IsString, Length } from 'class-validator';
-
-enum TransactionType {
-  REVENUE = 'REVENUE',
-  EXPENSE = 'EXPENSE',
-}
-
 export class CreateCategoryDto {
   @IsString()
   @IsNotEmpty()
@@ -19,11 +14,7 @@ export class CreateCategoryDto {
   @Length(6)
   color: string;
 
-  @IsString()
   @IsNotEmpty()
-  @IsEnum({
-    REVENUE: 'REVENUE',
-    EXPENSE: 'EXPENSE',
-  })
-  type: string;
+  @IsEnum(TransactionType)
+  type: TransactionType;
 }
