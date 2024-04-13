@@ -35,10 +35,11 @@ CREATE TABLE "Transaction" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "user_id" TEXT NOT NULL,
-    "category_id" TEXT,
+    "category_id" TEXT DEFAULT '',
     "value" DOUBLE PRECISION NOT NULL,
     "type" "TransactionType"[],
-    "created_at" TIMESTAMP(3) NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "date" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Transaction_pkey" PRIMARY KEY ("id")
 );

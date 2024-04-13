@@ -27,5 +27,5 @@ export class CreateTransactionDto {
 
   @IsDateString()
   @IsNotEmpty()
-  created_at: Date;
+  date: Date;
 }
