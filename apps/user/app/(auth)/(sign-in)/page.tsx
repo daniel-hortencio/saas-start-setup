@@ -1,7 +1,6 @@
 "use client";
 
 import { Button, InputPassword, InputText } from "@repo/ui/components";
-import Link from "next/link";
 
 export default function SignIn() {
   return (

@@ -1,24 +1,71 @@
 "use client";
 
-import { Button, InputPassword, InputText } from "@repo/ui/components";
-import Link from "next/link";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Button,
+  InputPassword,
+  InputText,
+  useToast,
+} from "@repo/ui/components";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { userServices } from "../../../modules/user/services";
+import { UserCreateSchema, UserCreateType } from "../../../modules/user/types";
 
 export default function SignUp() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UserCreateType>({ resolver: zodResolver(UserCreateSchema) });
+
+  const { toast } = useToast();
+  /*
+  toast({
+    title: "Teste",
+  }); */
+
+  const onSubmit: SubmitHandler<UserCreateType> = async (data) => {
+    await userServices
+      .create(data)
+      .then((res) => {
+        console.log({ res });
+      })
+      .catch((err) => {
+        console.log({ err });
+        /*  toast({
+          title: `Não foi possível cadastrar`,
+          description: err.message,
+        }); */
+      });
+  };
+
   return (
-    <div className="w-full">
-      <InputText name="name" label="Nome" placeholder="Insira seu Nome" />
-      <InputText name="email" label="Email" placeholder="Insira seu email" />
+    <form className="w-full space-y-4" onSubmit={handleSubmit(onSubmit)}>
+      <InputText
+        {...register("name")}
+        error={errors.name?.message}
+        label="Nome"
+        placeholder="Insira seu Nome"
+      />
+      <InputText
+        {...register("email")}
+        error={errors.email?.message}
+        label="Email"
+        placeholder="Insira seu email"
+      />
       <InputPassword
         label="Password"
-        name="password"
+        {...register("password")}
+        error={errors.password?.message}
         placeholder="Insira sua senha"
       />
       <InputPassword
-        label="Password"
-        name="password-confirmation"
+        label="Password Confirmation"
+        error={errors.password_confirmation?.message}
+        {...register("password_confirmation")}
         placeholder="Confirme sua senha"
       />
       <Button className="w-full">SignUp</Button>
-    </div>
+    </form>
   );
 }

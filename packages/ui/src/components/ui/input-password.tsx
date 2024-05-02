@@ -7,7 +7,7 @@ import { InputBase, InputProps } from "@ui/components/ui/input-base";
 import { Label } from "./label";
 
 const InputPassword = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, label, name, placeholder, ...props }, ref) => {
+  ({ className, label, name, error, ...props }, ref) => {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
@@ -19,7 +19,7 @@ const InputPassword = forwardRef<HTMLInputElement, InputProps>(
             type={showPassword ? "text" : "password"}
             className="hide-password-toggle pr-10"
             ref={ref}
-            {...{ ...props, name, placeholder }}
+            {...{ ...props, name }}
           />
           <Button
             type="button"
@@ -47,6 +47,7 @@ const InputPassword = forwardRef<HTMLInputElement, InputProps>(
 					}
 				`}</style>
         </div>
+        <span className="text-sm text-red-500">{error}</span>
       </div>
     );
   },

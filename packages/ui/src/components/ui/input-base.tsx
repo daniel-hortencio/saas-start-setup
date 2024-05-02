@@ -4,11 +4,10 @@ import * as React from "react";
 
 import { cn } from "@ui/lib/utils";
 
-export interface InputProps {
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  placeholder: string;
-  name: string;
-  className?: string;
+  error?: string;
 }
 
 const InputBase = React.forwardRef<
