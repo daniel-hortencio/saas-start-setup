@@ -15,3 +15,10 @@ export const UserCreateSchema = z
   });
 
 export type UserCreateType = z.infer<typeof UserCreateSchema>;
+
+export const UserSignInSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6).max(36),
+});
+
+export type UserSignInType = z.infer<typeof UserSignInSchema>;

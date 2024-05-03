@@ -6,11 +6,11 @@ export { Icon } from "@ui/components/ui/Icon";
 export { InputPassword } from "@ui/components/ui/input-password";
 export { InputText } from "@ui/components/ui/input-text";
 export { Neumorphic } from "@ui/components/ui/neumorphic";
-export { Toast } from "@ui/components/ui/toast";
+export { Toast, ToastAction } from "@ui/components/ui/toast";
 export { Toaster } from "@ui/components/ui/toaster";
 
 // hooks
-export { useToast } from "@ui/components/ui/use-toast";
+export { useToast, toast } from "@ui/components/ui/use-toast";
 
 // types
 export type { InputProps } from "@ui/components/ui/input-base";

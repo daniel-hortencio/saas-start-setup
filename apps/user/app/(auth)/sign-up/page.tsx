@@ -5,6 +5,7 @@ import {
   Button,
   InputPassword,
   InputText,
+  ToastAction,
   useToast,
 } from "@repo/ui/components";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -19,23 +20,21 @@ export default function SignUp() {
   } = useForm<UserCreateType>({ resolver: zodResolver(UserCreateSchema) });
 
   const { toast } = useToast();
-  /*
-  toast({
-    title: "Teste",
-  }); */
 
   const onSubmit: SubmitHandler<UserCreateType> = async (data) => {
     await userServices
       .create(data)
-      .then((res) => {
-        console.log({ res });
+      .then(() => {
+        toast({
+          title: `Usuário criado com sucesso!`,
+        });
       })
       .catch((err) => {
-        console.log({ err });
-        /*  toast({
-          title: `Não foi possível cadastrar`,
+        toast({
+          title: `Não foi possível cadastrar!`,
           description: err.message,
-        }); */
+          variant: "destructive",
+        });
       });
   };
 

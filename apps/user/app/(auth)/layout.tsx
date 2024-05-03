@@ -1,8 +1,9 @@
 "use client";
 
-import { Card } from "@repo/ui/components";
+import { Card, Toaster } from "@repo/ui/components";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 
 function getTitle(pathname: string) {
   if (pathname === "/") return "SignIn";
@@ -27,7 +28,12 @@ export default function AuthLayout({
 }: {
   children: React.ReactNode;
 }): JSX.Element {
+  const { status } = useSession();
   const pathname = usePathname();
+
+  if (status === "authenticated") {
+    redirect("/dashboard");
+  }
 
   return (
     <div className="h-screen flex flex-col justify-between">
@@ -36,6 +42,7 @@ export default function AuthLayout({
           {getTitle(pathname)}
         </h1>
         <main className="p-5 w-full">{children}</main>
+        <Toaster />
         <div className="flex items-center justify-between w-full border-t-background-dark/50 border-t-[1px] px-5 py-2">
           {getLinks(pathname)}
         </div>

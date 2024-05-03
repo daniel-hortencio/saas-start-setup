@@ -19,8 +19,6 @@ export const apiFetch = ({
 }): Promise<FetchSuccess | FetchError> =>
   fetch(`http://localhost:3333${url}`, {
     method,
-    cache: "no-cache",
-    credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
     },
