@@ -46,14 +46,14 @@ export const CategoriesList = () => {
           </Button>
           <Button
             onClick={() => setFilterBy("REVENUE")}
-            variant={filterBy === "income" ? "default" : "outline"}
+            variant={filterBy === "REVENUE" ? "default" : "outline"}
             className="ml-2"
           >
             Receitas
           </Button>
           <Button
             onClick={() => setFilterBy("EXPENSE")}
-            variant={filterBy === "expanse" ? "default" : "outline"}
+            variant={filterBy === "EXPENSE" ? "default" : "outline"}
             className="ml-2"
           >
             Despesas

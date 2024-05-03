@@ -1,5 +1,5 @@
 type FetchSuccess<T> = {
-  data?: T;
+  data: T;
 };
 
 type FetchError = {
