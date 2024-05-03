@@ -1,5 +1,5 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { db_client } from "@repo/database";
+import { db_client, User } from "@repo/database";
 import { getServerSession, type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -20,6 +20,14 @@ export const authOptions: NextAuthOptions = {
           try {
             const user = await db_client.user.findFirst({
               where: { email, password },
+              select: {
+                id: true,
+                email: true,
+                name: true,
+                email_verified: true,
+                roles: true,
+                created_at: true,
+              },
             });
 
             if (!user) return null;
@@ -38,25 +46,24 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         return {
           ...token,
-          id: token.id,
-          email: token.email,
-          name: token.name,
-          email_verified: token.email_verified,
-          roles: token.roles,
+          ...user,
         };
       }
       return token;
     },
     async session({ session, token }) {
+      const { email, name, id, created_at, email_verified, roles } =
+        token as User;
       return {
         ...session,
         user: {
           ...session.user,
-          id: token.id,
-          email: token.email,
-          name: token.name,
-          email_verified: token.email_verified,
-          roles: token.roles,
+          email,
+          name,
+          id,
+          created_at,
+          email_verified,
+          roles,
         },
       };
     },

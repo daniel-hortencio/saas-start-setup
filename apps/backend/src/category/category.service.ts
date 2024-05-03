@@ -34,20 +34,19 @@ export class CategoryService {
   }
 
   async findAll(user_id: string) {
-    await this.userService.findOne(user_id);
-
     const categories = await this.DB_TABLE().findMany({
       where: {
         user_id,
       },
     });
 
-    return categories;
+    return categories.map((c) => ({
+      ...c,
+      type: c.type[0],
+    }));
   }
 
   async findOne(user_id: string, category_id: string) {
-    await this.userService.findOne(user_id);
-
     const category = await this.DB_TABLE().findFirst({
       where: {
         user_id,
@@ -62,7 +61,7 @@ export class CategoryService {
       );
     }
 
-    return category;
+    return { ...category, type: category.type[0] };
   }
 
   async update(
@@ -70,7 +69,6 @@ export class CategoryService {
     category_id: string,
     updateCategoryDto: UpdateCategoryDto,
   ) {
-    await this.findOne(user_id, category_id);
     await validateDto(updateCategoryDto);
 
     const { name, color, icon } = updateCategoryDto;
@@ -91,8 +89,6 @@ export class CategoryService {
   }
 
   async remove(user_id: string, category_id: string) {
-    await this.findOne(user_id, category_id);
-
     const deleted_category = await this.DB_TABLE().delete({
       where: {
         user_id,

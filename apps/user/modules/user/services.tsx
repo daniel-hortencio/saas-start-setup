@@ -1,7 +1,8 @@
-import { apiFetch } from "../../shared/apiFetch";
+import { apiFetch } from "../../shared/api/apiFetch";
+import { UserCreateType } from "./types";
 
 export const userServices = {
-  create: (dto) =>
+  create: (dto: UserCreateType) =>
     new Promise(async (resolve, reject) => {
       try {
         const response = await apiFetch({
@@ -16,7 +17,7 @@ export const userServices = {
         } else {
           resolve(response.data);
         }
-      } catch (error) {
+      } catch (error: any) {
         reject(new Error(error));
       }
     }),

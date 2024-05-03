@@ -36,14 +36,13 @@ export class CategoryController {
   }
 
   @Get()
-  findAll(@Headers('user_id') user_id: string) {
+  async findAll(@Headers('user_id') user_id: string) {
     if (!user_id) {
       throw new HttpException(
         Error.USER_ID_NOT_PROVIDED_IN_HEADER,
         HttpStatus.BAD_REQUEST,
       );
     }
-
     return this.categoryService.findAll(user_id);
   }
 
