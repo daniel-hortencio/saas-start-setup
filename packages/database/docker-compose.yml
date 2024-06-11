@@ -2,7 +2,7 @@ version: "3"
 services:
   db:
     image: "postgres:15-alpine"
-    container_name: "mi-obra-database"
+    container_name: "finances-database"
     restart: "always"
     environment:
       POSTGRES_DB: ${POSTGRES_DATABASE}

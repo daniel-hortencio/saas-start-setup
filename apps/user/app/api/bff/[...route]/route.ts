@@ -7,19 +7,24 @@ function resolveUrl(url: string) {
   return `${pathname.split("/api/bff")[1]}`;
 }
 
+const public_routes = ["/api/bff/users"];
+
+const isPublicRoute = (route: string) =>
+  public_routes.some((r) => route.endsWith(r));
+
 export async function handler(request: NextRequest) {
   const session = await hasSession();
-
-  if (!session) {
-    return NextResponse.json("Não está autenticado", {
-      status: 401,
-    });
-  }
 
   const { url, method } = request as {
     url: string;
     method: ApiMethod;
   };
+
+  if (!isPublicRoute(url) && !session) {
+    return NextResponse.json("Não está autenticado", {
+      status: 401,
+    });
+  }
 
   const body =
     method === "POST" || method === "PATCH" ? await request.json() : undefined;
@@ -29,7 +34,7 @@ export async function handler(request: NextRequest) {
     url: resolveUrl(url),
     body,
     headers: {
-      user_id: session?.user?.id,
+      user_id: session ? session?.user?.id : undefined,
     },
   });
 

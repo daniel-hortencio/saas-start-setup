@@ -1,3 +1,4 @@
+import { AES } from 'crypto-js';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { db_client } from '@repo/database';
 import { ErrorUsers } from './errors';
@@ -41,8 +42,13 @@ export class UserService {
       );
     }
 
+    const encrypted_password = AES.encrypt(
+      JSON.stringify(password),
+      process.env.PASSWORD_SECRET,
+    ).toString();
+
     const created_user = await this.DB_TABLE().create({
-      data: { email, name, password },
+      data: { email, name, password: encrypted_password },
     });
 
     return { ...created_user, password: undefined };

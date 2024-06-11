@@ -1,3 +1,4 @@
+import cryptoJS from "crypto-js";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { db_client, User } from "@repo/database";
 import { getServerSession, type NextAuthOptions } from "next-auth";
@@ -17,9 +18,12 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials, req) {
         if (req.method === "POST") {
           const { email, password } = credentials;
+
+          console.log({ email, password });
+
           try {
             const user = await db_client.user.findFirst({
-              where: { email, password },
+              where: { email },
               select: {
                 id: true,
                 email: true,
@@ -29,6 +33,8 @@ export const authOptions: NextAuthOptions = {
                 created_at: true,
               },
             });
+
+            console.log({ user });
 
             if (!user) return null;
 
@@ -79,8 +85,5 @@ export const authOptions: NextAuthOptions = {
 
 export const hasSession = async () => {
   const session = await getServerSession(authOptions);
-  if (!session) {
-    throw new Error("No auth session");
-  }
   return session;
 };

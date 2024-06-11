@@ -11,31 +11,39 @@ import {
 import { SubmitHandler, useForm } from "react-hook-form";
 import { userServices } from "../../../modules/user/services";
 import { UserCreateSchema, UserCreateType } from "../../../modules/user/types";
+import { useState } from "react";
 
 export default function SignUp() {
+  const [isloading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
+
     formState: { errors },
   } = useForm<UserCreateType>({ resolver: zodResolver(UserCreateSchema) });
 
   const { toast } = useToast();
 
   const onSubmit: SubmitHandler<UserCreateType> = async (data) => {
+    setIsLoading(true);
     await userServices
       .create(data)
-      .then(() => {
+      .then((res) => {
+        console.log({ res });
         toast({
           title: `Usuário criado com sucesso!`,
         });
       })
       .catch((err) => {
+        console.log({ err });
         toast({
           title: `Não foi possível cadastrar!`,
           description: err.message,
           variant: "destructive",
         });
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -64,7 +72,7 @@ export default function SignUp() {
         {...register("password_confirmation")}
         placeholder="Confirme sua senha"
       />
-      <Button className="w-full">SignUp</Button>
+      <Button className="w-full">{isloading ? "Loading" : "SignUp"}</Button>
     </form>
   );
 }

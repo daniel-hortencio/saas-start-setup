@@ -11,8 +11,6 @@ export const CategoriesList = () => {
     queryFn: async () => {
       const { data: categories } = await categoriesServices.getAll();
 
-      console.log({ categories });
-
       return categories;
     },
   });

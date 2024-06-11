@@ -20,14 +20,16 @@ export const FormSignIn = () => {
 
   const onSubmit: SubmitHandler<UserSignInType> = async (data) => {
     try {
-      const resultSingIn = await signIn("credentials", {
+      const result_sing_in = await signIn("credentials", {
         redirect: Boolean(false),
         email: data.email,
         password: data.password,
         callbackUrl: "/",
       });
 
-      if (resultSingIn?.error === "CredentialsSignin") {
+      console.log({ result_sing_in });
+
+      if (result_sing_in?.error === "CredentialsSignin") {
         toast({
           title: "Erro 1",
         });

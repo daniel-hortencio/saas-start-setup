@@ -24,22 +24,26 @@ export const apiFetch = <T>({
   headers,
 }: ApiFetch): Promise<FetchSuccess<T> | FetchError> =>
   new Promise(async (resolve, reject) => {
-    const response = await fetch(url, {
+    const res = await fetch(url, {
       method,
       headers: {
         "Content-Type": "application/json",
         ...headers,
       },
       body: JSON.stringify(body),
-    }).then((res) => res.json());
-
-    if (response.status >= 400) {
-      reject({ message: response.message });
-    }
-
-    resolve({
-      data: response,
     });
+
+    const is_error = !res.ok;
+
+    const response = await res.json();
+
+    if (is_error) {
+      reject(response.message);
+    } else {
+      resolve({
+        data: response,
+      });
+    }
   });
 
 export const apiBFF = <T>(params: ApiFetch) =>
