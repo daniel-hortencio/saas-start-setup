@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { hasSession } from "../../../../shared/lib/auth";
-import { apiBackend, ApiMethod } from "../../../../shared/api/apiFetch";
+import { apiFetch, ApiMethod } from "../../../../shared/api/apiFetch";
 
 function resolveUrl(url: string) {
   const { pathname } = new URL(url);
@@ -29,24 +29,11 @@ export async function handler(request: NextRequest) {
   const body =
     method === "POST" || method === "PATCH" ? await request.json() : undefined;
 
-  const response = await apiBackend({
-    method,
-    url: resolveUrl(url),
-    body,
-    headers: {
-      user_id: session ? session?.user?.id : undefined,
-    },
-  });
+  const { data, isOk } = await apiFetch[
+    method.toLowerCase() as keyof typeof apiFetch
+  ](`${process.env.API_BACKEND_URL}${resolveUrl(url)}`, body);
 
-  if (response.status >= 400) {
-    return NextResponse.json(response.message, {
-      status: response.status,
-    });
-  }
-
-  return NextResponse.json(response.data, {
-    status: response.status,
-  });
+  return NextResponse.json({ data, isOk });
 }
 
 export { handler as GET, handler as POST };
