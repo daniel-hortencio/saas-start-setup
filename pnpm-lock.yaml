@@ -21,6 +21,103 @@ importers:
         specifier: latest
         version: 1.13.0
 
+  apps/admin:
+    dependencies:
+      '@hookform/resolvers':
+        specifier: ^3.3.4
+        version: 3.3.4(react-hook-form@7.51.3)
+      '@next-auth/prisma-adapter':
+        specifier: ^1.0.7
+        version: 1.0.7(@prisma/client@5.11.0)(next-auth@4.24.7)
+      '@repo/database':
+        specifier: workspace:*
+        version: link:../../packages/database
+      '@repo/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@tanstack/react-query':
+        specifier: ^5.32.1
+        version: 5.32.1(react@18.2.0)
+      '@tanstack/react-query-devtools':
+        specifier: ^5.28.8
+        version: 5.28.8(@tanstack/react-query@5.32.1)(react@18.2.0)
+      '@trpc/client':
+        specifier: 11.0.0-rc.364
+        version: 11.0.0-rc.364(@trpc/server@11.0.0-rc.364)
+      '@trpc/next':
+        specifier: 11.0.0-rc.364
+        version: 11.0.0-rc.364(@tanstack/react-query@5.32.1)(@trpc/client@11.0.0-rc.364)(@trpc/react-query@11.0.0-rc.364)(@trpc/server@11.0.0-rc.364)(next@14.1.4)(react-dom@18.2.0)(react@18.2.0)
+      '@trpc/react-query':
+        specifier: 11.0.0-rc.364
+        version: 11.0.0-rc.364(@tanstack/react-query@5.32.1)(@trpc/client@11.0.0-rc.364)(@trpc/server@11.0.0-rc.364)(react-dom@18.2.0)(react@18.2.0)
+      '@trpc/server':
+        specifier: 11.0.0-rc.364
+        version: 11.0.0-rc.364
+      '@types/crypto-js':
+        specifier: ^4.2.2
+        version: 4.2.2
+      bcrypt:
+        specifier: ^5.1.1
+        version: 5.1.1
+      crypto-js:
+        specifier: ^4.2.0
+        version: 4.2.0
+      next:
+        specifier: ^14.0.4
+        version: 14.1.4(react-dom@18.2.0)(react@18.2.0)
+      next-auth:
+        specifier: ^4.24.7
+        version: 4.24.7(next@14.1.4)(react-dom@18.2.0)(react@18.2.0)
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-hook-form:
+        specifier: ^7.51.3
+        version: 7.51.3(react@18.2.0)
+      superjson:
+        specifier: ^2.2.1
+        version: 2.2.1
+      zod:
+        specifier: ^3.23.5
+        version: 3.23.5
+    devDependencies:
+      '@next/eslint-plugin-next':
+        specifier: ^14.0.4
+        version: 14.1.4
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
+      '@types/eslint':
+        specifier: ^8.56.1
+        version: 8.56.6
+      '@types/react':
+        specifier: ^18.2.46
+        version: 18.2.70
+      '@types/react-dom':
+        specifier: ^18.2.18
+        version: 18.2.22
+      autoprefixer:
+        specifier: ^10.4.17
+        version: 10.4.19(postcss@8.4.38)
+      eslint:
+        specifier: ^8.56.0
+        version: 8.57.0
+      postcss:
+        specifier: ^8.4.33
+        version: 8.4.38
+      tailwindcss:
+        specifier: ^3.4.1
+        version: 3.4.1
+      typescript:
+        specifier: ^5.3.3
+        version: 5.4.3
+
   apps/backend:
     dependencies:
       '@nestjs/common':
@@ -235,6 +332,9 @@ importers:
       '@prisma/client':
         specifier: ^5.9.1
         version: 5.11.0(prisma@5.11.0)
+      crypto-js:
+        specifier: ^4.2.0
+        version: 4.2.0
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -242,6 +342,9 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      '@types/crypto-js':
+        specifier: ^4.2.2
+        version: 4.2.2
       '@types/node':
         specifier: ^17.0.45
         version: 17.0.45
