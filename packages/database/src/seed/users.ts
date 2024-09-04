@@ -1,5 +1,5 @@
 import { AES } from "crypto-js";
-import { PrismaClient, User } from "@prisma/client";
+import { PrismaClient, Role } from "@prisma/client";
 
 export async function addUsers(prisma: PrismaClient) {
   const encrypted_password = AES.encrypt(
@@ -12,7 +12,7 @@ export async function addUsers(prisma: PrismaClient) {
       name: "Daniel",
       email: "daniel@mail.com",
       password: encrypted_password,
-      roles: ["USER", "ADMIN"],
+      roles: [Role.USER, Role.ADMIN],
     },
   });
 }

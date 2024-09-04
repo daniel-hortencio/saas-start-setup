@@ -60,7 +60,7 @@ export class UserService {
     });
   }
 
-  async findOne(id: string): Promise<FindUserDto> {
+  async findById(id: string): Promise<FindUserDto> {
     const user = await this.DB_TABLE().findUnique({
       where: {
         id,
@@ -80,7 +80,7 @@ export class UserService {
 
     const { name, password } = updateUserDto;
 
-    const user_exists = await this.findOne(id);
+    const user_exists = await this.findById(id);
 
     if (!user_exists) {
       throw new HttpException(ErrorUsers.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
@@ -97,7 +97,7 @@ export class UserService {
   }
 
   async remove(id: string) {
-    const user_exists = await this.findOne(id);
+    const user_exists = await this.findById(id);
 
     if (!user_exists) {
       throw new HttpException(ErrorUsers.USER_NOT_FOUND, HttpStatus.NOT_FOUND);
