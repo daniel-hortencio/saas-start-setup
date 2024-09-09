@@ -3,6 +3,7 @@ export * from "@ui/components/ui/avatar";
 export * from "@ui/components/ui/button";
 export * from "@ui/components/ui/card";
 export * from "@ui/components/ui/container";
+export * from "@ui/components/ui/drawer";
 export * from "@ui/components/ui/dropdown-menu";
 export * from "@ui/components/ui/icon";
 export * from "@ui/components/ui/input-password";
