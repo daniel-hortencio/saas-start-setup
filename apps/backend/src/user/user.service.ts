@@ -54,12 +54,6 @@ export class UserService {
     return { ...created_user, password: undefined };
   }
 
-  async findAll(): Promise<FindUserDto[]> {
-    return await this.DB_TABLE().findMany({
-      select: this.selectWithoutPassword(),
-    });
-  }
-
   async findById(id: string): Promise<FindUserDto> {
     const user = await this.DB_TABLE().findUnique({
       where: {

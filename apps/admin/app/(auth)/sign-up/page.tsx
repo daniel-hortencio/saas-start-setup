@@ -30,13 +30,11 @@ export default function SignUp() {
     await userServices
       .create(data)
       .then((res) => {
-        console.log({ res });
         toast({
           title: `Usuário criado com sucesso!`,
         });
       })
       .catch((err) => {
-        console.log({ err });
         toast({
           title: `Não foi possível cadastrar!`,
           description: err.message,

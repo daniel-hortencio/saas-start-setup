@@ -27,8 +27,6 @@ export const FormSignIn = () => {
         callbackUrl: "/",
       });
 
-      console.log({ result_sing_in });
-
       if (result_sing_in?.error === "CredentialsSignin") {
         toast({
           title: "Erro 1",

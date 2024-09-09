@@ -7,7 +7,7 @@ type ApiFetch = {
   headers?: {
     user_id?: string;
   };
-  queryParams?: object;
+  queryParams?: any;
 };
 
 export const useFetch = async ({
@@ -15,10 +15,10 @@ export const useFetch = async ({
   method,
   body,
   headers,
-  queryParams = {},
+  queryParams,
 }: ApiFetch) => {
   const getQuery = () => {
-    if (Object.keys(queryParams).length === 0) return "";
+    if (!queryParams || Object.keys(queryParams).length === 0) return "";
 
     return `?${Object.keys(queryParams)
       .map(

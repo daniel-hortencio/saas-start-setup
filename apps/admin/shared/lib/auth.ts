@@ -1,8 +1,8 @@
-import cryptoJS from "crypto-js";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { db_client, User } from "@repo/database";
 import { getServerSession, type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { useFetch } from "../api/apiFetch";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db_client),
@@ -19,26 +19,18 @@ export const authOptions: NextAuthOptions = {
         if (req.method === "POST") {
           const { email, password } = credentials;
 
-          console.log({ email, password });
-
           try {
-            const user = await db_client.user.findFirst({
-              where: { email },
-              select: {
-                id: true,
-                email: true,
-                name: true,
-                email_verified: true,
-                roles: true,
-                created_at: true,
-              },
+            const { isOk, data } = await useFetch({
+              path: `${process.env.BACKEND_URL}/auth/sign-in`,
+              method: "POST",
+              body: { email, password },
             });
 
-            console.log({ user });
+            console.log({ data });
 
-            if (!user) return null;
+            if (!isOk) return null;
 
-            return user;
+            return data;
           } catch (error) {
             return null;
           }
