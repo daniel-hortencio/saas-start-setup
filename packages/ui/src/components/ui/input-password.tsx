@@ -12,33 +12,34 @@ const InputPassword = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div {...{ className }}>
-        <Label htmlFor={name}>{label}</Label>
+        <div className="space-y-1">
+          <Label htmlFor={name}>{label}</Label>
 
-        <div className="relative w-full">
-          <InputBase
-            type={showPassword ? "text" : "password"}
-            className="hide-password-toggle pr-10"
-            ref={ref}
-            {...{ ...props, name }}
-          />
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-            onClick={() => setShowPassword((prev) => !prev)}
-          >
-            {showPassword ? (
-              <EyeIcon className="h-4 w-4" aria-hidden="true" />
-            ) : (
-              <EyeOffIcon className="h-4 w-4" aria-hidden="true" />
-            )}
-            <span className="sr-only">
-              {showPassword ? "Hide password" : "Show password"}
-            </span>
-          </Button>
+          <div className="relative w-full">
+            <InputBase
+              type={showPassword ? "text" : "password"}
+              className="hide-password-toggle pr-10"
+              ref={ref}
+              {...{ ...props, name }}
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+              onClick={() => setShowPassword((prev) => !prev)}
+            >
+              {showPassword ? (
+                <EyeIcon className="h-4 w-4" aria-hidden="true" />
+              ) : (
+                <EyeOffIcon className="h-4 w-4" aria-hidden="true" />
+              )}
+              <span className="sr-only">
+                {showPassword ? "Hide password" : "Show password"}
+              </span>
+            </Button>
 
-          <style>{`
+            <style>{`
 					.hide-password-toggle::-ms-reveal,
 					.hide-password-toggle::-ms-clear {
 						visibility: hidden;
@@ -46,6 +47,7 @@ const InputPassword = forwardRef<HTMLInputElement, InputProps>(
 						display: none;
 					}
 				`}</style>
+          </div>
         </div>
         <span className="text-sm text-red-500">{error}</span>
       </div>
