@@ -9,8 +9,8 @@ export async function addUsers(prisma: PrismaClient) {
 
   await prisma.user.create({
     data: {
-      name: "Daniel",
-      email: "daniel@mail.com",
+      name: "Owner",
+      email: "owner@mail.com",
       password: encrypted_password,
       roles: [Role.USER, Role.ADMIN],
     },

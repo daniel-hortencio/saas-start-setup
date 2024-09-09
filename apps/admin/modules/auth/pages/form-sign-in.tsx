@@ -1,7 +1,6 @@
 "use client";
 
 import { SubmitHandler, useForm } from "react-hook-form";
-import { UserSignInSchema, UserSignInType } from "../../user/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
@@ -10,6 +9,7 @@ import {
   useToast,
 } from "@repo/ui/components";
 import { signIn } from "next-auth/react";
+import { UserSignInSchema, UserSignInType } from "../../user/schemas";
 
 export const FormSignIn = () => {
   const {
@@ -31,12 +31,14 @@ export const FormSignIn = () => {
 
       if (result_sing_in?.error === "CredentialsSignin") {
         toast({
+          variant: "destructive",
           title: "Erro 1",
         });
         return;
       }
     } catch (errorMessage) {
       toast({
+        variant: "destructive",
         title: "Erro 2",
       });
     }
@@ -47,6 +49,7 @@ export const FormSignIn = () => {
       <div className="space-y-2">
         <InputText
           {...register("email")}
+          id="email"
           error={errors.email?.message}
           label="Email"
           placeholder="Insira seu email"
@@ -54,6 +57,7 @@ export const FormSignIn = () => {
         <InputPassword
           label="Password"
           {...register("password")}
+          id="password"
           error={errors.password?.message}
           placeholder="Insira sua senha"
         />
