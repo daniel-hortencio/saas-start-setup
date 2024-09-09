@@ -1,5 +1,7 @@
+"use client";
+
 import { SubmitHandler, useForm } from "react-hook-form";
-import { UserSignInSchema, UserSignInType } from "../user/types";
+import { UserSignInSchema, UserSignInType } from "../../user/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
@@ -41,19 +43,21 @@ export const FormSignIn = () => {
   };
 
   return (
-    <form className="w-full space-y-4" onSubmit={handleSubmit(onSubmit)}>
-      <InputText
-        {...register("email")}
-        error={errors.email?.message}
-        label="Email"
-        placeholder="Insira seu email"
-      />
-      <InputPassword
-        label="Password"
-        {...register("password")}
-        error={errors.password?.message}
-        placeholder="Insira sua senha"
-      />
+    <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
+      <div className="space-y-2">
+        <InputText
+          {...register("email")}
+          error={errors.email?.message}
+          label="Email"
+          placeholder="Insira seu email"
+        />
+        <InputPassword
+          label="Password"
+          {...register("password")}
+          error={errors.password?.message}
+          placeholder="Insira sua senha"
+        />
+      </div>
       <Button className="w-full" type="submit">
         SignIn
       </Button>

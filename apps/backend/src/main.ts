@@ -7,7 +7,6 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Backend')
-    //.setDescription('The cats API description')
     .setVersion('1.0')
     .addTag('health')
     .build();
