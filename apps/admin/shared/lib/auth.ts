@@ -26,8 +26,6 @@ export const authOptions: NextAuthOptions = {
               body: { email, password },
             });
 
-            console.log({ data });
-
             if (!isOk) return null;
 
             return data;

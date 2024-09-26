@@ -8,7 +8,7 @@ type Props = {
 
 export const DashboardLayout = ({ children }: Props) => {
   return (
-    <div className="test min-h-screen w-screen">
+    <div className="min-h-screen w-screen">
       <DashboardHeader />
       <Container className="pt-16">{children}</Container>
       <Toaster />
