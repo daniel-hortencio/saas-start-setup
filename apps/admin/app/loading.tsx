@@ -1,3 +1,10 @@
+import { Spinner } from "@repo/ui/components";
+import "@repo/ui/globals.css";
+
 export default function Loading() {
-  return <h1>Carregando...</h1>;
+  return (
+    <div className="bg-foreground w-screen h-screen flex items-center justify-center">
+      <Spinner.BeatLoader color="white" />
+    </div>
+  );
 }

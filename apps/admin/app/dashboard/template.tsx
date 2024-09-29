@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { DashboardLayout } from "../../shared/components/layouts/dashboard";
@@ -15,5 +16,9 @@ export default function DashboardTemplate({
     redirect("/");
   }
 
-  return <DashboardLayout>{children}</DashboardLayout>;
+  return status === "authenticated" ? (
+    <DashboardLayout>{children}</DashboardLayout>
+  ) : (
+    <></>
+  );
 }

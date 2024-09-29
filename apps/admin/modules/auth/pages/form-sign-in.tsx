@@ -9,7 +9,7 @@ import {
   useToast,
 } from "@repo/ui/components";
 import { signIn } from "next-auth/react";
-import { UserSignInSchema, UserSignInType } from "../../user/schemas";
+import { UserSignInSchema, UserSignInType } from "../../users/schemas";
 
 export const FormSignIn = () => {
   const {
