@@ -9,6 +9,8 @@ export * from "@ui/components/ui/icon";
 export * from "@ui/components/ui/input-password";
 export * from "@ui/components/ui/input-text";
 export * from "@ui/components/ui/neumorphic";
+export * from "@ui/components/ui/spinner";
+export * from "@ui/components/ui/table";
 export * from "@ui/components/ui/toast";
 export * from "@ui/components/ui/toaster";
 
